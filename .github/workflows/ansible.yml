@@ -20,5 +20,10 @@ jobs:
       # Clone Repo
       - uses: actions/checkout@v3
 
+      - name: Install Python Packages
+        run: |
+          . /opt/pipx/venvs/ansible-core/bin/activate
+          /opt/pipx/venvs/ansible-core/bin/python -m pip install boto3 botocore
+
       - name: Test Inventory
         run: ansible -i aws_ec2.yml -m ping all 
