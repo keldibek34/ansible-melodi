@@ -11,10 +11,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      ANSIBLE_HOST_KEY_CHECKING: False
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
 
     steps:
       # Clone Repo
       - uses: actions/checkout@v3
 
-      - name: Test Ansible
-        run: ansible --version
+      - name: Test Inventory
+        run: ansible -i aws_ec2.yml -m ping all 
