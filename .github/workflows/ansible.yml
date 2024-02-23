@@ -30,5 +30,5 @@ jobs:
           echo "${{ secrets.ANSIBLE_SSH_KEY }}" > ansible_key 
           chmod 400 ansible_key
 
-      - name: Test Inventory
-        run: ansible --private-key=ansible_key -i aws_ec2.yml -m ping all -u ec2-user
+      - name: Run Ansible Playbook
+        run: ansible-playbook  --private-key=ansible_key -i aws_ec2.yml main.yml -u ec2-user -b 
